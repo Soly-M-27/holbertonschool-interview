@@ -40,7 +40,7 @@ def minOperations(n):
     while len(a) < paste:
         a += x
         m += 1
-        if len (a) == n:
+        if len(a) == n:
             return m
 
     rep_paste = a
