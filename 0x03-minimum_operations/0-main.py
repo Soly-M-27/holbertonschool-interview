@@ -3,8 +3,6 @@
 Main file for testing
 """
 
-from curses.ascii import NL
-
 
 minOperations = __import__('0-minoperations').minOperations
 
