@@ -1,71 +1,117 @@
 #include "binary_trees.h"
 
 /**
- * insertLeaf - insert new Leaf
- * @r: root of max heap tree
- * @value: value of new leaf
- * Return: pointer to leaf
+ * binary_tree_insert_right - Write a function that inserts a
+ * node as the left-child of another node
+ * @parent: pointer to node to insert left-child in
+ * @value: value to store in the new node
+ *
+ * Return: pointer to created node, or NULL if parent is NULL
  */
-heap_t *insertLeaf(heap_t *r, int value)
+
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 {
-	heap_t *q[1025] = {NULL}, *leaf = NULL;
-	int i = 0, tailIndex = 0;
+	binary_tree_t *newNode;
 
-	q[0] = r;
-	while (q[i] != NULL)
+	if (parent == NULL)
+		return (NULL);
+
+	newNode = binary_tree_node(parent, value);
+
+	if (newNode == NULL)
+		return (NULL);
+
+	newNode->parent = parent;
+	newNode->n = value;
+
+	if (parent->right != NULL)
 	{
-		if (q[i]->left == NULL)
-		{
-			leaf = binary_tree_node(q[i], value);
-			q[i]->left = leaf;
-			break;
-		}
-		else
-			q[++tailIndex] = q[i]->left;
-
-		if (q[i]->right == NULL)
-		{
-			leaf = binary_tree_node(q[i], value);
-			q[i]->right = leaf;
-			break;
-		}
-		else
-			q[++tailIndex] = q[i]->right;
-		i++;
+		newNode->right = parent->right;
+		parent->right->parent = newNode;
 	}
-	return (leaf);
+	parent->right = newNode;
+
+	return (newNode);
 }
 
 /**
- * heap_insert - inserts a value into a Max Binary Heap
- * @root: double pointer to the root node of the Heap
- * @value: value to put in the new node
- * Return: pointer to the inserted node or NULL if failed
+ * binary_tree_insert_left - Write a function that inserts a
+ * node as the left-child of another node
+ * @parent: pointer to node to insert left-child in
+ * @value: value to store in the new node
+ *
+ * Return: pointer to created node, or NULL if parent is NULL
  */
+
+binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
+{
+	binary_tree_t *newNode;
+
+	if (parent == NULL)
+		return (NULL);
+
+	newNode = binary_tree_node(parent, value);
+
+	if (newNode == NULL)
+		return (NULL);
+
+	if (parent->left != NULL)
+	{
+		newNode->left = parent->left;
+		parent->left->parent = newNode;
+	}
+	parent->left = newNode;
+
+	return (newNode);
+}
+
+/**
+ * heap_insert - Function that inserts a value into a Max Binary Heap
+ * @root: tree
+ * @value: Value to be inserted respecting the Max Heap Order. 
+ * 
+ * Return: The new heap
+ */
+
 heap_t *heap_insert(heap_t **root, int value)
 {
-	binary_tree_t *leaf = NULL, *tmp = NULL;
-	int temp = 0;
+    heap_t *insert = NULL, *current;
 
-	if ((root == NULL) || (*root == NULL))
+	insert = binary_tree_node(*root, value);
+ 
+    if (root == NULL || *root == NULL)
 	{
-		leaf = binary_tree_node(*root, value);
-		*root = leaf;
-		return (leaf);
+		*root = insert;
+		return (insert);
 	}
 
-	leaf = insertLeaf(*root, value);
-	tmp = leaf;
-	while ((leaf != NULL) && (leaf->parent != NULL))
+	if (insert->parent->n < value)
 	{
-		if (leaf->parent->n < leaf->n)
+		if (insert->left == NULL)
 		{
-			temp = leaf->parent->n;
-			leaf->parent->n = leaf->n;
-			leaf->n = temp;
-			tmp = tmp->parent;
+			insert->left = binary_tree_insert_left(*root, (*root)->n);
+			current = insert->parent;
+			insert->parent->n = value;
+			current->parent = insert->parent;
 		}
-		leaf = leaf->parent;
 	}
-	return (tmp);
+	if (insert->parent->n > value)
+	{
+		if (insert->right != NULL)
+		{
+			if (insert->right->n < value)
+			{
+				if (insert->left->n > value)
+				{
+					insert->left->left = binary_tree_insert_left((*root)->left->left, insert->n = value);
+				}
+			}
+		}
+		if (insert->right == NULL)
+		{
+			insert->right = binary_tree_insert_right(*root, insert->n);
+		}
+		
+	}
+    return (insert);
 }
