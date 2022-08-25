@@ -19,6 +19,23 @@ def minOperations(n):
     Returns:
         int: Min num of operations needed to return n number of the letter H
     """
+    buf = n
+    div = 2
+    count = 0
+    if type(n) is not int or n < 2:
+        return 0
+    while buf > 1:
+        if buf % div == 0:
+            buf /= div
+            count += div
+        else:
+            div += 1
+    return count
+    
+
+
+
+"""
     if n < 2 or type(n) is not int:
         return 0
 
@@ -32,9 +49,9 @@ def minOperations(n):
         paste = n
     if n % 2 == 0 and n % 3 != 0 and len(a) <= 1:
         paste = 2
-    elif n % 2 != 0 and n % 3 == 0 and len(a) <= 1:
+    if n % 2 != 0 and n % 3 == 0 and len(a) <= 1:
         paste = 3
-    elif n % 2 == 0 and n % 3 == 0 and len(a) <= 1:
+    if n % 2 == 0 and n % 3 == 0 and len(a) <= 1:
         paste = 3
 
     while len(a) < paste:
@@ -52,3 +69,4 @@ def minOperations(n):
             m += 1
         if len(a) == n:
             return m
+"""
