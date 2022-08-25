@@ -4,6 +4,9 @@ Main file for testing
 """
 
 
+from re import I
+
+
 minOperations = __import__('0-minoperations').minOperations
 
 n = 4
