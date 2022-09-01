@@ -4,22 +4,22 @@
  * test_stability - Function to test stability
  * @grid1: 3x3 stable grid
  *
- * Return: 0 if stable or 1 if not
+ * Return: 0 if stable or 1 if not stable
  */
 
 int test_stability(int grid1[3][3])
 {
-    int x, y;
+	int x, y;
 
-    for (x = 0; x < 3; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            if (grid1[x][y] > 3)
-                return (0);
-        }
-    }
-    return (1);
+	for (x = 0; x < 3; x++)
+	{
+		for (y = 0; y < 3; y++)
+		{
+			if (grid1[x][y] > 3)
+				return (0);
+		}
+	}
+	return (1);
 }
 
 /**
@@ -29,46 +29,46 @@ int test_stability(int grid1[3][3])
 
 void topple_grid(int grid1[3][3])
 {
-    int x, y;
-    int zero_grid[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+	int x, y;
+	int zero_grid[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-    printf("=\n");
-    print_grid(grid1);
-    for (x = 0; x < 3; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            if (grid1[x][y] > 3)
-            {
-                grid1[x][y] -= 4;
+	printf("=\n");
+	print_grid(grid1);
+	for (x = 0; x < 3; x++)
+	{
+		for (y = 0; y < 3; y++)
+		{
+			if (grid1[x][y] > 3)
+			{
+				grid1[x][y] -= 4;
 
-                if (x >= 0 && x < 2)
-                {
-                    zero_grid[x + 1][y] += 1;
-                }
-                if (x > 0 && x <= 2)
-                {
-                    zero_grid[x - 1][y] += 1;
-                }
-                if (y >= 0 && y < 2)
-                {
-                    zero_grid[x][y + 1] += 1;
-                }
-                if (y > 0 && y <= 2)
-                {
-                    zero_grid[x][y - 1] += 1;
-                }
-            }
-        }
-    }
+				if (x >= 0 && x < 2)
+				{
+					zero_grid[x + 1][y] += 1;
+				}
+				if (x > 0 && x <= 2)
+				{
+					zero_grid[x - 1][y] += 1;
+				}
+				if (y >= 0 && y < 2)
+				{
+					zero_grid[x][y + 1] += 1;
+				}
+				if (y > 0 && y <= 2)
+				{
+					zero_grid[x][y - 1] += 1;
+				}
+			}
+		}
+	}
 
-    for (x = 0; x < 3; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            grid1[x][y] += zero_grid[x][y];
-        }
-    }
+	for (x = 0; x < 3; x++)
+	{
+		for (y = 0; y < 3; y++)
+		{
+			grid1[x][y] += zero_grid[x][y];
+		}
+	}
 }
 
 /**
@@ -79,17 +79,17 @@ void topple_grid(int grid1[3][3])
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-    int x, y;
+	int x, y;
 
-    for (x = 0; x < 3; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            grid1[x][y] = grid1[x][y] + grid2[x][y];
-        }
-    }
-    while (test_stability(grid1) == 0)
-    {
-        topple_grid(grid1);
-    }
+	for (x = 0; x < 3; x++)
+	{
+		for (y = 0; y < 3; y++)
+		{
+			grid1[x][y] = grid1[x][y] + grid2[x][y];
+		}
+	}
+	while (test_stability(grid1) == 0)
+	{
+		topple_grid(grid1);
+	}
 }
