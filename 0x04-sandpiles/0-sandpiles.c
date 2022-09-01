@@ -75,8 +75,6 @@ void topple_grid(int grid1[3][3])
  * sandpiles_sum - Function that computes the sum of two sandpiles
  * @grid1: 3x3 stable grid
  * @grid2: 3x3 stable grif
- *
- * Return: grid1 sumed up by grid1 + grid2
  */
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
