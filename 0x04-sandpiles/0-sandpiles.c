@@ -89,7 +89,9 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
         {
             grid1[x][y] = grid1[x][y] + grid2[x][y];
         }
-        while (test_stability(grid1) == 0)
-            topple_grid(grid1);
+    }
+    while (test_stability(grid1) == 0)
+    {
+        topple_grid(grid1);
     }
 }
