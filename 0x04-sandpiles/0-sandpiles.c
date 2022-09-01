@@ -1,9 +1,9 @@
 #include "sandpiles.h"
 
 /**
- * test_stability - Function to test stability 
+ * test_stability - Function to test stability
  * @grid1: 3x3 stable grid
- * 
+ *
  * Return: 0 if stable or 1 if not
  */
 
@@ -15,16 +15,16 @@ int test_stability(int grid1[3][3])
     {
         for (y = 0; y < 3; y++)
         {
-            if (grid1[x][y] <= 3)
-                return (0);   
+            if (grid1[x][y] > 3)
+                return (0);
         }
-    }  
-    return (1); 
+    }
+    return (1);
 }
 
 /**
- * topple_grid - Function to topple grid accordingly to make it stable  
- * @grid1: 3x3 grid  
+ * topple_grid - Function to topple grid accordingly to make it stable
+ * @grid1: 3x3 grid
  */
 
 void topple_grid(int grid1[3][3])
@@ -38,7 +38,7 @@ void topple_grid(int grid1[3][3])
     {
         for (y = 0; y < 3; y++)
         {
-            if (grid1[x][y] >= 4)
+            if (grid1[x][y] > 3)
             {
                 grid1[x][y] -= 4;
 
@@ -72,10 +72,10 @@ void topple_grid(int grid1[3][3])
 }
 
 /**
- * sandpiles_sum - Function that computes the sum of two sandpiles 
+ * sandpiles_sum - Function that computes the sum of two sandpiles
  * @grid1: 3x3 stable grid
  * @grid2: 3x3 stable grif
- * 
+ *
  * Return: grid1 sumed up by grid1 + grid2
  */
 
@@ -89,8 +89,8 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
         {
             grid1[x][y] = grid1[x][y] + grid2[x][y];
 
-            if (test_stability(grid1) != 0)
-                topple_grid(grid1);       
         }
+        while (test_stability(grid1) == 0)
+            topple_grid(grid1);
     }
 }
