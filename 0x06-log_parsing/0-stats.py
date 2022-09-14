@@ -25,17 +25,17 @@ try:
             if status in CODES:
                 CODES[status] += 1
             total_size += current_size
-            lines += 1 
+            lines += 1
             if lines == 10:
                 print("File size: {:d}".format(total_size))
                 for key, value in sorted(CODES.items()):
                     if value != 0:
                         print("{}: {:d}".format(key, value))
-                    lines = 0   
+                    lines = 0
 except KeyboardInterrupt:
     pass
 finally:
     print("File size: {:d}".format(total_size))
     for key, value in sorted(CODES.items()):
         if value != 0:
-            print("{}: {:d}".format(key, value)) 
+            print("{}: {:d}".format(key, value))
