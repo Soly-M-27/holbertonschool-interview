@@ -7,7 +7,6 @@
  * @row: row
  * Return: '#' or ' '
  */
-
 char find_char(int col, int row)
 {
     for (; col && row; col /= 3, row /= 3)
