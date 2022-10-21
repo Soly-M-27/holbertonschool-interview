@@ -1,12 +1,13 @@
 #include "menger.h"
 
 /**
- * find_char - selects block or no block
+ * find_char - selects block or none
  *
  * @col: column
  * @row: row
  * Return: '#' or ' '
  */
+
 char find_char(int col, int row)
 {
     for (; col && row; col /= 3, row /= 3)
@@ -22,6 +23,7 @@ char find_char(int col, int row)
  *
  * @level: level of the Menger Sponge to draw
  */
+
 void menger(int level)
 {
     int col, row, size;
