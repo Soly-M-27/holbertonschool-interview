@@ -2,6 +2,7 @@
 """ N queens """
 import sys
 
+
 def check_in(b, col):
     """ Randomize list based on range """
     n = len(b)
@@ -13,12 +14,14 @@ def check_in(b, col):
             b[col] = row
             check_in(b, col + 1)
 
+
 def cposition(b, row, col):
     """ Check position """
     for c in range(col):
         if b[c] is row or abs(b[c] - row) is abs(c - col):
             return False
     return True
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
