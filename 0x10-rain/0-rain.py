@@ -3,10 +3,7 @@
 def rain(walls=[]):
     list_len = len(walls)
     current_wall = 0
-    temp = 0
     new_wall = 0
-    zero_count = 0
-    wall_extract = 0
     total_water = 0
 
     if (list_len == 0):
