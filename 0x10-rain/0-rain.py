@@ -28,5 +28,3 @@ def rain(walls=[]):
             #print("-------------------------")
             #print("total_water: {:d}".format(total_water))
     return total_water
-            
-            
