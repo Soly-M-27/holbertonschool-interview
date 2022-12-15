@@ -5,7 +5,7 @@
  *
  * @array: array to be searched
  * @first: first element of the array
- * @last: last element of the array and total 
+ * @last: last element of the array and total
  * @value: value to search for in array
  * Return: recursion or -1 if value has been found
  */
