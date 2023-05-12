@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-"""Module count_words"""
-import requests
+"""
+Defines recursive function to query the Reddit API,
+parse titles of all hot articles, and print sorted count
+"""
 
 
 def count_words(subreddit, word_list, after=None, count={}):
@@ -14,7 +16,8 @@ def count_words(subreddit, word_list, after=None, count={}):
         after: indicates next starting point to get data after
         count: dictionary of current count of keyword
     """
-
+    import json
+    import requests
     if after is None:
         sub_URL = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
     else:
