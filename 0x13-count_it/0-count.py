@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Module count_words"""
 import requests
-import sys
 
 
-def count_words(subreddit, word_list, kw_cont={}, next_pg=None, reap_kw={}):
+def count_words(subreddit, word_list, kw_count={}, next_pg=None, reap_kw={}):
     """
     Query the Reddit API, parse titles of all hot articles and print a
     sorted count of given keywords
@@ -13,9 +12,9 @@ def count_words(subreddit, word_list, kw_cont={}, next_pg=None, reap_kw={}):
         word_list (str): list of words to search for
         kw_count (dict): Creates dict to store strings
         next_pg (str): next page
-        reap_kw (dict): Creates dict to store strings
+        reap_kw (dict): Creates dict to store repeated strings
     """
-    headers = {"User-Agent": "nildiert"}
+    headers = {"User-Agent": "user"}
 
     if next_pg:
         subr = requests.get('https://reddit.com/r/' + subreddit +
@@ -27,9 +26,9 @@ def count_words(subreddit, word_list, kw_cont={}, next_pg=None, reap_kw={}):
     if subr.status_code == 404:
         return
 
-    if kw_cont == {}:
+    if kw_count == {}:
         for word in word_list:
-            kw_cont[word] = 0
+            kw_count[word] = 0
             reap_kw[word] = word_list.count(word)
 
     subr_dict = subr.json()
@@ -42,19 +41,19 @@ def count_words(subreddit, word_list, kw_cont={}, next_pg=None, reap_kw={}):
         post_title = post_data['title']
         title_words = post_title.split()
         for w in title_words:
-            for key in kw_cont:
+            for key in kw_count:
                 if w.lower() == key.lower():
-                    kw_cont[key] += 1
+                    kw_count[key] += 1
 
     if next_pg:
-        count_words(subreddit, word_list, kw_cont, next_pg, reap_kw)
+        count_words(subreddit, word_list, kw_count, next_pg, reap_kw)
 
     else:
         for key, val in reap_kw.items():
             if val > 1:
-                kw_cont[key] *= val
+                kw_count[key] *= val
 
-        sorted_abc = sorted(kw_cont.items(), key=lambda x: x[0])
+        sorted_abc = sorted(kw_count.items(), key=lambda x: x[0])
         sorted_res = sorted(sorted_abc, key=lambda x: (-x[1], x[0]))
         for res in sorted_res:
             if res[1] > 0:
