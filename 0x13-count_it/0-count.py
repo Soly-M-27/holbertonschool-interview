@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module count_words"""
 import requests
+import json
 
 
 def count_words(subreddit, word_list, after=None, count={}):
