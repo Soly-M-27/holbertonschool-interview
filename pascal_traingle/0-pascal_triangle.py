@@ -9,7 +9,7 @@ def pascal_triangle(n):
     Args:
         n (int): Limit for the Pascal Triangle to be created
     Returns:
-        Pascal's Triangle of n or an empty list if n <= 0
+        Pascal's Triangle of n or an empty list if n <= 0.
     """
     if n <= 0:
         return []
